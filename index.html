@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aditi, Be Mine?</title>
+    <style>
+        body { 
+            margin: 0; 
+            height: 100vh; 
+            background: linear-gradient(135deg, #8B0000, #000000); 
+            color: #FFC1CC; 
+            font-family: 'Arial', cursive; 
+            text-align: center; 
+            overflow: hidden; 
+            animation: fadeIn 2s; 
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        h1 { font-size: 4em; margin-top: 20vh; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        button { background: #FFC1CC; color: #000; padding: 15px 30px; font-size: 1.5em; border: none; border-radius: 50px; cursor: pointer; margin: 20px; }
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; }
+    </style>
+</head>
+<body>
+    <canvas id="hearts"></canvas>
+    <h1>Aditi, Will You Be Mine? 💕</h1>
+    <button onclick="yesClick()">Yes ❤️</button>
+    <button onclick="noClick()">Maybe Later</button>
+    
+    <audio autoplay loop>
+        <source src="https://www.chosic.com/wp-content/uploads/2023/01/romantic-track.mp3" type="audio/mpeg"> <!-- Replace with Chosic free romantic MP3 -->
+    </audio>
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script>
+        // Simple heart animation canvas
+        const canvas = document.getElementById('hearts');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        function drawHeart() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#FFC1CC';
+            ctx.save(); ctx.translate(Math.random()*canvas.width, Math.random()*canvas.height); ctx.scale(0.1,0.1);
+            ctx.beginPath(); ctx.moveTo(0,0); ctx.bezierCurveTo(-50,50,0,100,50,50); ctx.bezierCurveTo(100,0,50,-50,0,-50); ctx.closePath(); ctx.fill();
+            ctx.restore(); requestAnimationFrame(drawHeart);
+        } drawHeart();
+        
+        function yesClick() { confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 }, colors: ['#FFC1CC', '#8B0000'] }); }
+        function noClick() { alert('Think about it, Aditi! 💖'); }
+    </script>
+</body>
+</html>
